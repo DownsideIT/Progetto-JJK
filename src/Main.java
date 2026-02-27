@@ -21,11 +21,11 @@ public class Main {
 
         switch(sceltaPlayer){
             case 1:
-                player = new Gojo(1000);
+                player = new Gojo(2000);
                 Utilities.pausa(200);
                 break;
             case 2:
-                player = new Sukuna(1000);
+                player = new Sukuna(2000);
                 Utilities.pausa(200);
                 break;
         }
@@ -39,11 +39,11 @@ public class Main {
 
         switch(sceltaEnemy){
             case 1:
-                enemy = new Gojo(1000);
+                enemy = new Gojo(2000);
                 Utilities.pausa(200);
                 break;
             case 2:
-                enemy = new Sukuna(1000);
+                enemy = new Sukuna(2000);
                 Utilities.pausa(200);
                 break;
             case 3:
@@ -80,18 +80,27 @@ public class Main {
 
             System.out.println("\nTurno Nemico:");
 
-            if (enemy instanceof Gojo) {
-                int mossaBot = rand.nextInt(3) + 1;
-                ((Gojo) enemy).moveset(mossaBot, player);
-            } else if (enemy instanceof Sukuna) {
-                ((Sukuna) enemy).moveset(player);
-            }
 
+            if(player instanceof Gojo && ((Gojo)player).unlimitedVoidStun > 0){
+                System.out.println("Il nemico non può muoversi|");
+                ((Gojo)player).unlimitedVoid();
+            }else {
+                if (enemy instanceof Gojo) {
+                    int mossaBot = rand.nextInt(3) + 1;
+                    ((Gojo) enemy).moveset(mossaBot, player);
+                } else if (enemy instanceof Sukuna) {
+                    ((Sukuna) enemy).moveset(player);
+                }
+            }
 
             System.out.println("Vita Player: " + player.getHealth());
 
             if(player instanceof Gojo){
-                System.out.println("Awakening: "+((Gojo)player).getAwakenbar());
+                if(!((Gojo) player).awakening) {
+                    System.out.println("Awakening: " + ((Gojo) player).getAwakenbar());
+                }else if(((Gojo) player).awakening){
+                    System.out.println("Domain: "+((Gojo)player).getDomainbar());
+                }
             }else{
                 System.out.println("Awakening: "+((Sukuna)player).getAwakenbar());
             }

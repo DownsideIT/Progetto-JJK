@@ -8,6 +8,9 @@ public class Gojo extends HealthChanges {
 
     public int awakenbar=0;
 
+    public int domainbar=0;
+    public int unlimitedVoidStun =0;
+
     boolean usedBlue=false;
     boolean usedRed=false;
 
@@ -17,6 +20,10 @@ public class Gojo extends HealthChanges {
 
     public int getAwakenbar() {
         return awakenbar;
+    }
+
+    public int getDomainbar() {
+        return domainbar;
     }
 
     public void moveset(int scelta, HealthChanges target){
@@ -55,15 +62,13 @@ public class Gojo extends HealthChanges {
                         System.out.println("Black Flash!");
                         target.faiDanno(300);
                         awakenbar += 30;
-
-                        if(awakenbar>100){
-                            awakenbar=100;
-                        }
-
                     } else {
                         System.out.println("Punch Combo");
                         target.faiDanno(75);
                         awakenbar += 5;
+                    }
+                    if(awakenbar>100){
+                        awakenbar=100;
                     }
                     break;
 
@@ -90,13 +95,29 @@ public class Gojo extends HealthChanges {
 
                 case 1:
                     System.out.println("Max Lapse Blue");
-                    target.faiDanno(150);
+                    if(unlimitedVoidStun>0){
+                        target.faiDanno(150*1.5);
+                    }else {
+                        target.faiDanno(150);
+                        domainbar+=40;
+                    }
+                    if (domainbar>100){
+                        domainbar=100;
+                    }
                     usedBlue=true;
                     break;
 
                 case 2:
                     System.out.println("Max Reversal Red");
-                    target.faiDanno(300);
+                    if(unlimitedVoidStun>0){
+                        target.faiDanno(300*1.5);
+                    }else {
+                        target.faiDanno(300);
+                        domainbar+=40;
+                    }
+                    if (domainbar>100){
+                        domainbar=100;
+                    }
                     usedRed=true;
                     break;
 
@@ -105,22 +126,56 @@ public class Gojo extends HealthChanges {
 
                     if (blackflash == 3) {
                         System.out.println("Black Flash!");
-                        target.faiDanno(500);
+                        if(unlimitedVoidStun>0){
+                            target.faiDanno(500*1.5);
+                        }else {
+                            target.faiDanno(500);
+                            domainbar+=100;
+                        }
                     } else {
                         System.out.println("Furious Beatdown");
-                        target.faiDanno(150);
+                        if(unlimitedVoidStun>0){
+                            target.faiDanno(150*1.5);
+                        }else {
+                            target.faiDanno(150);
+                            domainbar+=40;
+                        }
+                    }
+                    if (domainbar>100){
+                        domainbar=100;
                     }
                     break;
 
                 case 4:
                     if(usedBlue && usedRed){
                         System.out.println("Hollow Purple");
-                        target.faiDanno(800);
+                        if(unlimitedVoidStun>0){
+                            target.faiDanno(800*1.5);
+                        }else {
+                            target.faiDanno(800);
+                            domainbar+=100;
+                        }
+                        if (domainbar>100){
+                            domainbar=100;
+                        }
                         usedBlue=false;
                         usedRed=false;
                         Utilities.pausa(1000);
                     }else{
                         System.out.println("Non ancora pronto...");
+                    }
+                    break;
+
+                case 5:
+                    if (domainbar==100){
+                        System.out.println("Domain expansion");
+                        Utilities.pausa(1000);
+                        System.out.println("Unlimited Void");
+                        Utilities.pausa(1000);
+                        unlimitedVoidStun=3;
+                        domainbar=0;
+                    }else{
+                        System.out.println("Non ancora");
                     }
                     break;
 
@@ -132,7 +187,13 @@ public class Gojo extends HealthChanges {
         if(!awakening) {
             System.out.println("1) Lapse blue\n2) Reversal red\n3) Punch Combo\n4) Awakening: Six Eyes");
         }else{
-            System.out.println("1) Max Lapse Blue\n2) Max Reversal Red\n3) Furious Beatdown\n4) Hollow Purple");
+            System.out.println("1) Max Lapse Blue\n2) Max Reversal Red\n3) Furious Beatdown\n4) Hollow Purple\n5) Domain Expansion: Unlimited Void");
+        }
+    }
+
+    public void unlimitedVoid(){
+        if (unlimitedVoidStun>0) {
+            unlimitedVoidStun -= 1;
         }
     }
 }
