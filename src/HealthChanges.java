@@ -27,4 +27,8 @@ public class HealthChanges {
     public double getHealth(){
         return health;
     }
+
+    public boolean isDomainActive(){
+        return false;
+    }
 }

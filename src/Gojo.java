@@ -7,7 +7,6 @@ public class Gojo extends HealthChanges {
     boolean awakening=false;
 
     public int awakenbar=0;
-
     public int domainbar=0;
     public int unlimitedVoidStun =0;
 
@@ -167,10 +166,10 @@ public class Gojo extends HealthChanges {
                     break;
 
                 case 5:
-                    if (domainbar==100){
+                     if(domainbar >= 100 && !target.isDomainActive()){
                         System.out.println("Domain expansion");
                         Utilities.pausa(1000);
-                        System.out.println("Unlimited Void");
+                        System.out.println("\nUnlimited Void");
                         Utilities.pausa(1000);
                         unlimitedVoidStun=3;
                         domainbar=0;
@@ -195,5 +194,10 @@ public class Gojo extends HealthChanges {
         if (unlimitedVoidStun>0) {
             unlimitedVoidStun -= 1;
         }
+    }
+
+    @Override
+    public boolean isDomainActive(){
+        return unlimitedVoidStun > 0;
     }
 }
