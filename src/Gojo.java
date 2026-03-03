@@ -50,7 +50,6 @@ public class Gojo extends HealthChanges {
                     if(awakenbar>100){
                         awakenbar=100;
                     }
-
                     break;
 
                 case 2:
@@ -61,7 +60,6 @@ public class Gojo extends HealthChanges {
                     if(awakenbar>100){
                         awakenbar=100;
                     }
-
                     break;
 
                 case 3:
@@ -90,7 +88,6 @@ public class Gojo extends HealthChanges {
                         cura(500);
                         awakenbar = 0;
                         Utilities.pausa(1000);
-
                     } else {
                         System.out.println("Awakening non pronto");
                     }
@@ -186,6 +183,10 @@ public class Gojo extends HealthChanges {
                     }else{
                         System.out.println("Non ancora");
                     }
+                    break;
+
+                default:
+                    System.out.println("Mossa non valida");
                     break;
 
             }

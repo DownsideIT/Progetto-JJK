@@ -95,6 +95,10 @@ public class Sukuna extends HealthChanges {
                         System.out.println("Awakening non pronto");
                     }
                     break;
+
+                default:
+                    System.out.println("Mossa non valida");
+                    break;
             }
         }else{
             switch (scelta){
@@ -182,6 +186,10 @@ public class Sukuna extends HealthChanges {
                     }else{
                         System.out.println("Non ancora");
                     }
+                    break;
+
+                default:
+                    System.out.println("Mossa non valida");
                     break;
             }
         }
