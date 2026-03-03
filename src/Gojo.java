@@ -25,6 +25,16 @@ public class Gojo extends HealthChanges {
         return domainbar;
     }
 
+    @Override
+    public int mossaCPU(){
+        if(!awakening){
+            return random.nextInt(4) + 1;
+        } else {
+            return random.nextInt(5) + 1;
+        }
+    }
+
+    @Override
     public void moveset(int scelta, HealthChanges target){
 
         int blackflash;
@@ -73,7 +83,7 @@ public class Gojo extends HealthChanges {
 
                 case 4:
                     if (awakenbar == 100) {
-                        System.out.println("Awakening");
+                        System.out.println("\nAwakening");
                         Utilities.pausa(1000);
                         System.out.println("\nSix eyes");
                         awakening = true;
@@ -147,7 +157,7 @@ public class Gojo extends HealthChanges {
 
                 case 4:
                     if(usedBlue && usedRed){
-                        System.out.println("Hollow Purple");
+                        System.out.println("\nHollow Purple");
                         if(unlimitedVoidStun>0){
                             target.faiDanno(800*1.5);
                         }else {
@@ -167,7 +177,7 @@ public class Gojo extends HealthChanges {
 
                 case 5:
                      if(domainbar >= 100 && !target.isDomainActive()){
-                        System.out.println("Domain expansion");
+                        System.out.println("\nDomain expansion");
                         Utilities.pausa(1000);
                         System.out.println("\nUnlimited Void");
                         Utilities.pausa(1000);
@@ -182,6 +192,7 @@ public class Gojo extends HealthChanges {
         }
     }
 
+    @Override
     public void stampaMoveset(){
         if(!awakening) {
             System.out.println("1) Lapse blue\n2) Reversal red\n3) Punch Combo\n4) Awakening: Six Eyes");

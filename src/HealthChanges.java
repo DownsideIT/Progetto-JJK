@@ -31,4 +31,12 @@ public class HealthChanges {
     public boolean isDomainActive(){
         return false;
     }
+
+    public void stampaMoveset(){}
+
+    public void moveset(int scelta, HealthChanges target){}
+
+    public int mossaCPU(){
+        return 1;
+    }
 }

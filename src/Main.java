@@ -6,7 +6,6 @@ public class Main {
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
-        Random rand = new Random();
 
         int turno=0;
 
@@ -16,6 +15,7 @@ public class Main {
         System.out.println("Scegli il personaggio:");
         System.out.println("1) Gojo");
         System.out.println("2) Sukuna");
+        System.out.println("3) Megumi (WIP)");
 
         int sceltaPlayer = sc.nextInt();
 
@@ -61,64 +61,51 @@ public class Main {
             System.out.println("\nTurno " + turno);
             System.out.println("\nTurno del giocatore - scegli la tua mossa:");
 
-            if (player instanceof Gojo) {
-                ((Gojo) player).stampaMoveset();
-            } else {
-                ((Sukuna) player).stampaMoveset();
-            }
+            player.stampaMoveset();
 
             int sceltaMossa = sc.nextInt();
 
-            if (player instanceof Gojo) {
-                ((Gojo) player).moveset(sceltaMossa, enemy);
-                Utilities.pausa(200);
-            } else if (player instanceof Sukuna) {
-                ((Sukuna) player).moveset(sceltaMossa, enemy);
-                Utilities.pausa(200);
-            }
+            player.moveset(sceltaMossa, enemy);
+            Utilities.pausa(500);
 
             if (enemy.getHealth() <= 0) break;
 
             System.out.println("\nTurno Nemico:");
 
-
             if (player instanceof Gojo && ((Gojo) player).unlimitedVoidStun > 0) {
-                System.out.println("Il nemico non può muoversi|");
+                System.out.println("\nIl nemico non può muoversi|");
                 ((Gojo) player).unlimitedVoid();
             } else {
-                if (enemy instanceof Gojo) {
-                    int mossaBot = rand.nextInt(4) + 1;
-                    ((Gojo) enemy).moveset(mossaBot, player);
-                } else if (enemy instanceof Sukuna) {
-                    ((Sukuna) enemy).moveset(player);
-                }
+                int sceltaBot = enemy.mossaCPU();
+                enemy.moveset(sceltaBot, player);
             }
 
-            System.out.println("Vita Player: " + player.getHealth());
+            System.out.println("\nVita Player: " + player.getHealth());
 
             if (player instanceof Gojo) {
                 if (!((Gojo) player).awakening) {
-                    System.out.println("Awakening: " + ((Gojo) player).getAwakenbar());
+                    System.out.println("Awakening: " + ((Gojo) player).getAwakenbar()+"%");
                 } else if (((Gojo) player).awakening) {
-                    System.out.println("Domain: " + ((Gojo) player).getDomainbar());
+                    System.out.println("Domain: " + ((Gojo) player).getDomainbar()+"%");
                 }
             } else if (!((Sukuna) player).awakening) {
-                System.out.println("Awakening: " + ((Sukuna) player).getAwakenbar());
+                System.out.println("Awakening: " + ((Sukuna) player).getAwakenbar()+"%");
             } else if (((Sukuna) player).awakening) {
-                System.out.println("Domain: " + ((Sukuna) player).getDomainbar());
+                System.out.println("Domain: " + ((Sukuna) player).getDomainbar()+"%");
             }
 
-            Utilities.pausa(500);
+            Utilities.pausa(1000);
 
             System.out.println("\nVita Enemy: " + enemy.getHealth());
+            Utilities.pausa(1000);
         }
 
         if(enemy.getHealth()<=0){
-            System.out.println("Vince il giocatore 1");
+            System.out.println("\nVince il giocatore 1");
         }else{
-            System.out.println("Vince il giocatore 2");
+            System.out.println("\nVince il giocatore 2");
         }
 
-        System.out.println("Fine combattimento!");
+        System.out.println("\nFine combattimento!");
     }
 }

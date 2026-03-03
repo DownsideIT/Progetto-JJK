@@ -17,8 +17,13 @@ public class Sukuna extends HealthChanges {
         super(health);
     }
 
-    public int mossaSukuna(){
-        return rand.nextInt(4) + 1;
+    @Override
+    public int mossaCPU(){
+        if(!awakening){
+            return rand.nextInt(4) + 1;
+        } else {
+            return rand.nextInt(5) + 1;
+        }
     }
 
     public int awakenbar;
@@ -31,16 +36,13 @@ public class Sukuna extends HealthChanges {
         return domainbar;
     }
 
-    public void moveset(int scelta, HealthChanges target){
-        eseguiMossa(scelta, target);
-    }
-
     public void moveset(HealthChanges target){
         int scelta = rand.nextInt(5) + 1;
-        eseguiMossa(scelta, target);
+        moveset(scelta, target);
     }
 
-    private void eseguiMossa(int scelta, HealthChanges target){
+    @Override
+    public void moveset(int scelta, HealthChanges target){
 
         if(!awakening) {
             switch (scelta) {
@@ -81,7 +83,7 @@ public class Sukuna extends HealthChanges {
 
                 case 4:
                     if (awakenbar >= 100) {
-                        System.out.println("Awakening");
+                        System.out.println("\nAwakening");
                         Utilities.pausa(1000);
                         System.out.println("\nKing of Curses");
                         awakening = true;
@@ -153,7 +155,7 @@ public class Sukuna extends HealthChanges {
 
                 case 4:
                     if(chant==3){
-                        System.out.println("World Cutting Slash");
+                        System.out.println("\nWorld Cutting Slash");
                         target.faiDanno(850);
                         chant=0;
                         if (domainCounter == 0) {
@@ -171,7 +173,7 @@ public class Sukuna extends HealthChanges {
 
                 case 5:
                     if(domainbar >= 100 && !target.isDomainActive()) {
-                        System.out.println("Domain expansion");
+                        System.out.println("\nDomain expansion");
                         Utilities.pausa(1000);
                         System.out.println("\nMalevolent Shrine");
                         Utilities.pausa(1000);
@@ -184,6 +186,8 @@ public class Sukuna extends HealthChanges {
             }
         }
     }
+
+    @Override
     public void stampaMoveset(){
         if(!awakening) {
             System.out.println("1) Dismantle\n2) Cleave\n3) Cursed Combo\n4) King of Curses");
