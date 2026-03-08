@@ -6,9 +6,10 @@ public class Megumi extends HealthChanges{
 
     boolean awakening=false;
 
-    public int awakenbar=0;
-    public int awakenbar2=0;
-    public int domainbar=0;
+    protected int awakenbar=0;
+    protected int awakenbar2=0;
+    protected int domainbar=0;
+    protected int domainCounter=0;
 
     public Megumi(double health){
         super(health);
@@ -95,6 +96,7 @@ public class Megumi extends HealthChanges{
                 case 1:
                     System.out.println("Rabbit flood");
                     target.faiDanno(100);
+                    shadowGarden(target,100);
                     domainbar+=40;
                     if(domainbar>100){
                         domainbar=100;
@@ -108,6 +110,7 @@ public class Megumi extends HealthChanges{
                 case 2:
                     System.out.println("Orochi");
                     target.faiDanno(125);
+                    shadowGarden(target,125);
                     domainbar+=40;
                     if(domainbar>100){
                         domainbar=100;
@@ -122,6 +125,7 @@ public class Megumi extends HealthChanges{
                     if(cooldownMossa==0) {
                         System.out.println("Max Elephant");
                         target.faiDanno(175);
+                        shadowGarden(target,175);
                         domainbar+=40;
                         if(domainbar>100){
                             domainbar=100;
@@ -139,6 +143,7 @@ public class Megumi extends HealthChanges{
                 case 4:
                     System.out.println("Divine Dogs Totality");
                     target.faiDanno(150);
+                    shadowGarden(target,150);
                     domainbar+=40;
                     if(domainbar>100){
                         domainbar=100;
@@ -148,6 +153,20 @@ public class Megumi extends HealthChanges{
                         awakenbar2=100;
                     }
                     break;
+
+                case 5:
+                    if(domainbar>=100) {
+                        System.out.println("\nDomain expansion");
+                        Utilities.pausa(1000);
+                        System.out.println("\nChimera Shadow Garden");
+                        Utilities.pausa(1000);
+                        domainCounter += 3;
+                        domainbar = 0;
+                    }else{
+                        System.out.println("Non ancora");
+                    }
+                    break;
+
 
                 default:
                     System.out.println("Mossa non valida");
@@ -162,7 +181,7 @@ public class Megumi extends HealthChanges{
             System.out.println("Awakening: " + getAwakenbar() + "%");
         } else {
             System.out.println("Domain: " + getDomainbar() + "%");
-            System.out.println("...: " + getAwakenbar2() + "%");
+            System.out.println("Rituale (NON IMPLEMENTATO): " + getAwakenbar2() + "%");
         }
     }
 
@@ -171,7 +190,17 @@ public class Megumi extends HealthChanges{
         if(!awakening){
             System.out.println("1) Rabbit swarm\n2) Nue\n3) Toad\n4) Awakening: Insanity");
         }else{
-            System.out.println("2) Rabbit flood\n2) Orochi\n3) Max Elephant\n4) Divine Dogs Totality");
+            System.out.println("1) Rabbit flood\n2) Orochi\n3) Max Elephant\n4) Divine Dogs Totality\n5) Domain expansion: Chimera Shadow Garden");
+        }
+    }
+
+    private void shadowGarden(HealthChanges target, double danno){
+        if(domainCounter>0){
+            Utilities.pausa(1000);
+            System.out.println("\nLe ombre attaccano senza tregua");
+            Utilities.pausa(1000);
+            target.faiDanno(danno);
+            domainCounter--;
         }
     }
 }

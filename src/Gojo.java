@@ -8,7 +8,7 @@ public class Gojo extends HealthChanges {
 
     public int awakenbar=0;
     public int domainbar=0;
-    public int unlimitedVoidStun =0;
+    public int unlimitedVoidStun=0;
 
     boolean usedBlue=false;
     boolean usedRed=false;
@@ -80,7 +80,7 @@ public class Gojo extends HealthChanges {
                     break;
 
                 case 4:
-                    if (awakenbar == 100) {
+                    if (awakenbar >= 100) {
                         System.out.println("\nAwakening");
                         Utilities.pausa(1000);
                         System.out.println("\nSix eyes");
@@ -206,6 +206,16 @@ public class Gojo extends HealthChanges {
         if (unlimitedVoidStun>0) {
             unlimitedVoidStun -= 1;
         }
+    }
+
+    @Override
+    public boolean bloccaTurnoNemico() {
+        if (unlimitedVoidStun > 0) {
+            System.out.println("\nIl nemico non può muoversi");
+            unlimitedVoid();
+            return true;
+        }
+        return false;
     }
 
     @Override

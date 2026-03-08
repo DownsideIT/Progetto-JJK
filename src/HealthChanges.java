@@ -54,6 +54,10 @@ public class HealthChanges {
         }
     }
 
+    public boolean bloccaTurnoNemico() {
+        return false;
+    }
+
     public void stampaMoveset(){}
 
     public void moveset(int scelta, HealthChanges target){}

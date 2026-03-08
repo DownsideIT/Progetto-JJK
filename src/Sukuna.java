@@ -183,6 +183,7 @@ public class Sukuna extends HealthChanges {
                         Utilities.pausa(1000);
                         domainCounter+=3;
                         domainbar=0;
+
                     }else{
                         System.out.println("Non ancora");
                     }

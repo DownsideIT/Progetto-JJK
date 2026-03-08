@@ -102,10 +102,7 @@ public class Main {
 
             System.out.println("\nTurno Nemico:");
 
-            if (player instanceof Gojo && ((Gojo) player).unlimitedVoidStun > 0) {
-                System.out.println("\nIl nemico non può muoversi|");
-                ((Gojo) player).unlimitedVoid();
-            } else {
+            if (!player.bloccaTurnoNemico()) {
                 int sceltaBot = enemy.mossaCPU();
                 enemy.moveset(sceltaBot, player);
             }
