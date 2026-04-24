@@ -19,28 +19,28 @@ public class Main {
         System.out.println("2) Sukuna");
         System.out.println("3) Megumi (WIP)");
 
-        int sceltaPlayer = sc.nextInt();
+        String sceltaPlayer = sc.next();
 
         while(!sceltaValida) {
             switch (sceltaPlayer) {
-                case 1:
+                case "1":
                     player = new Gojo(2000);
                     Utilities.pausa(200);
                     sceltaValida = true;
                     break;
-                case 2:
+                case "2":
                     player = new Sukuna(2000);
                     Utilities.pausa(200);
                     sceltaValida = true;
                     break;
-                case 3:
+                case "3":
                     player = new Megumi(2000);
                     Utilities.pausa(200);
                     sceltaValida = true;
                     break;
                 default:
                     System.out.println("Personaggio non esistente");
-                    sceltaPlayer = sc.nextInt();
+                    sceltaPlayer = sc.next();
             }
         }
 
@@ -52,33 +52,33 @@ public class Main {
         System.out.println("3) Megumi");
         System.out.println("4) Dummy");
 
-        int sceltaEnemy = sc.nextInt();
+        String sceltaEnemy = sc.next();
 
         while(!sceltaValida){
             switch (sceltaEnemy) {
-                case 1:
+                case "1":
                     enemy = new Gojo(2000);
                     sceltaValida = true;
                     Utilities.pausa(200);
                     break;
-                case 2:
+                case "2":
                     enemy = new Sukuna(2000);
                     sceltaValida = true;
                     Utilities.pausa(200);
                     break;
-                case 3:
+                case "3":
                     enemy = new Megumi(2000);
                     sceltaValida = true;
                     Utilities.pausa(200);
                     break;
-                case 4:
+                case "4":
                     enemy = new Dummy(10000);
                     sceltaValida = true;
                     Utilities.pausa(200);
                     break;
                 default:
                     System.out.println("Personaggio non esistente");
-                    sceltaEnemy = sc.nextInt();
+                    sceltaEnemy = sc.next();
             }
         }
 
