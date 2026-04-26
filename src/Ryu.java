@@ -3,9 +3,7 @@ import java.util.Random;
 public class Ryu extends HealthChanges{
     Random random=new Random();
 
-    boolean awakening=false;
-
-    boolean criticOverheat =false;
+    int awakenState=0;
 
     protected int awakenbar=0;
     protected int awakenbar2=0;
@@ -26,13 +24,17 @@ public class Ryu extends HealthChanges{
         return domainbar;
     }
 
-    public int getAwakenbar2() {
-        return awakenbar2;
+    public int getOverheat(){
+        return overheat;
+    }
+
+    public int getCharge(){
+        return charge;
     }
 
     @Override
     public int mossaCPU(){
-        if(!awakening){
+        if(awakenState==0){
             return random.nextInt(4) + 1;
         } else {
             return random.nextInt(5) + 1;
@@ -41,7 +43,7 @@ public class Ryu extends HealthChanges{
 
     @Override
     public void moveset(int scelta, HealthChanges target){
-        if(!awakening){
+        if(awakenState==0){
             switch(scelta) {
 
                 case 1:
@@ -123,48 +125,54 @@ public class Ryu extends HealthChanges{
                 case 6:
                     System.out.println("Awakening");
                     Utilities.pausa(1000);
-                    System.out.println("Prego");
-                    Utilities.pausa(1000);
-                    System.out.println("Siediti pure al tavolo, Okkotsu");
+                    System.out.println("\nPrego");
                     Utilities.pausa(1500);
-                    awakening=true;
+                    System.out.println("\nSiediti pure al tavolo, Okkotsu");
+                    Utilities.pausa(1500);
+                    awakenState=1;
                     cura(500);
                     break;
                 }
 
-            }else if(awakening){
+            }else if(awakenState==1){
                 switch(scelta){
 
                     case 1:
-                        System.out.println("Charge");
-                        charge++;
+                        if(charge<5) {
+                            System.out.println("Charge");
+                            charge++;
+                        }else{
+                            System.out.println("Carico al massimo");
+                        }
                         break;
 
                     case 2:
                         System.out.println("\nDiamoci dentro");
                         Utilities.pausa(1500);
                         target.faiDanno(800+(charge*100));
-                        criticOverheat=true;
+                        awakenState=2;
                         cura(300);
                         break;
             }
-        }else if(awakening && criticOverheat){
+        }else if(awakenState==2){
             switch(scelta){
 
                 case 1:
-                    System.out.println("Chi si aspettava...");
-                    Utilities.pausa(1000);
-                    System.out.println("Che si potesse continuare anche dopo aver dato fondo a tutto!");
+                    Utilities.playSound("src/audio/Ryu_allout.wav");
+                    System.out.println("\nChi si aspettava...");
+                    Utilities.pausa(2450);
+                    System.out.println("\nChe si potesse continuare anche dopo aver dato fondo a tutto!");
                     Utilities.pausa(3000);
                     target.faiDanno(350);
                     faiDanno(125);
                     break;
 
                 case 2:
-                    System.out.println("Allora è questo...");
-                    Utilities.pausa(1000);
-                    System.out.println("Il dessert...");
-                    Utilities.pausa(1000);
+                    Utilities.playSound("src/audio/Ryu_dessert.wav");
+                    System.out.println("\nAllora è questo...");
+                    Utilities.pausa(1700);
+                    System.out.println("\nIl dessert...");
+                    Utilities.pausa(1500);
                     target.faiDanno(250);
                     faiDanno(100);
                     break;
@@ -175,6 +183,27 @@ public class Ryu extends HealthChanges{
                     faiDanno(75);
                     break;
             }
+        }
+    }
+
+    @Override
+    public void stampaMoveset(){
+        if(awakenState==0){
+            System.out.println("1) Granite blast\n2) Sudden exchange\n3) Granite barrage\n4) Circling blast\n5) Re-style\n6) Awakening: Every Last Drop");
+        }else if(awakenState==1){
+            System.out.println("1) Charge\n2) True cannon");
+        }else if(awakenState==2){
+            System.out.println("1) All-out beat down\n2) Satisfaction at last \n3) Furious exchange");
+        }
+    }
+
+    @Override
+    public void stampaBarre(){
+        if(awakenState==0) {
+            System.out.println("Surriscaldamento: "+getOverheat());
+            System.out.println("Awaken: "+getAwakenbar());
+        }else if(awakenState==1){
+            System.out.println("Cariche: "+getCharge());
         }
     }
 }

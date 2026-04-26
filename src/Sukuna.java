@@ -20,9 +20,25 @@ public class Sukuna extends HealthChanges {
     @Override
     public int mossaCPU(){
         if(!awakening){
-            return rand.nextInt(4) + 1;
+            if(awakenbar<100) {
+                return rand.nextInt(3) + 1;
+            }else{
+                return 4;
+            }
         } else {
-            return rand.nextInt(5) + 1;
+            if(domainbar<100) {
+                if(chant==3){
+                    return 4;
+                }else {
+                    if(!usedFurnace) {
+                        return rand.nextInt(3) + 1;
+                    }else{
+                        return rand.nextInt(2) + 1;
+                    }
+                }
+            }else{
+                return 5;
+            }
         }
     }
 
@@ -237,5 +253,14 @@ public class Sukuna extends HealthChanges {
     @Override
     public boolean isDomainActive(){
         return domainCounter > 0;
+    }
+
+    @Override
+    public void stampaBarre(){
+        if(!awakening) {
+            System.out.println("Awaken: "+getAwakenbar());
+        }else{
+            System.out.println("Domain: "+getDomainbar());
+        }
     }
 }

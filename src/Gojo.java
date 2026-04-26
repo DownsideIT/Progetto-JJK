@@ -28,9 +28,21 @@ public class Gojo extends HealthChanges {
     @Override
     public int mossaCPU(){
         if(!awakening){
-            return random.nextInt(4) + 1;
+            if(awakenbar<100) {
+                return random.nextInt(3) + 1;
+            }else{
+                return 4;
+            }
         } else {
-            return random.nextInt(5) + 1;
+            if(domainbar<100) {
+                if(!usedRed || !usedBlue){
+                    return random.nextInt(3) + 1;
+                }else{
+                    return 4;
+                }
+            }else{
+                return 5;
+            }
         }
     }
 
@@ -221,5 +233,14 @@ public class Gojo extends HealthChanges {
     @Override
     public boolean isDomainActive(){
         return unlimitedVoidStun > 0;
+    }
+
+    @Override
+    public void stampaBarre(){
+        if(!awakening) {
+            System.out.println("Awaken: "+getAwakenbar());
+        }else{
+            System.out.println("Domain: "+getDomainbar());
+        }
     }
 }

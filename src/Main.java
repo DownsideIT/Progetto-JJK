@@ -7,6 +7,8 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
+        Utilities.playMusicLoop("src/audio/AIZO.wav");
+
         int turno=0;
 
         boolean sceltaValida = false;
@@ -18,6 +20,7 @@ public class Main {
         System.out.println("1) Gojo");
         System.out.println("2) Sukuna");
         System.out.println("3) Megumi (WIP)");
+        System.out.println("4) Ryu (WIP) ");
 
         String sceltaPlayer = sc.next();
 
@@ -38,6 +41,11 @@ public class Main {
                     Utilities.pausa(200);
                     sceltaValida = true;
                     break;
+                case "4":
+                    player=new Ryu(2000);
+                    Utilities.pausa(200);
+                    sceltaValida=true;
+                    break;
                 default:
                     System.out.println("Personaggio non esistente");
                     sceltaPlayer = sc.next();
@@ -50,7 +58,8 @@ public class Main {
         System.out.println("1) Gojo");
         System.out.println("2) Sukuna");
         System.out.println("3) Megumi");
-        System.out.println("4) Dummy");
+        System.out.println("4) Ryu");
+        System.out.println("5) Dummy");
 
         String sceltaEnemy = sc.next();
 
@@ -72,6 +81,11 @@ public class Main {
                     Utilities.pausa(200);
                     break;
                 case "4":
+                    enemy=new Ryu(2000);
+                    sceltaValida=true;
+                    Utilities.pausa(200);
+                    break;
+                case "5":
                     enemy = new Dummy(10000);
                     sceltaValida = true;
                     Utilities.pausa(200);
@@ -86,25 +100,33 @@ public class Main {
 
             boolean domainAttivo = player.isDomainActive() || enemy.isDomainActive();
 
+            boolean playerBloccato = enemy.bloccaTurnoNemico();
+            boolean enemyBloccato = player.bloccaTurnoNemico();
+
             turno += 1;
 
             System.out.println("\nTurno " + turno);
-            System.out.println("\nTurno del giocatore - scegli la tua mossa:");
 
-            player.stampaMoveset();
-
-            int sceltaMossa = sc.nextInt();
-
-            player.moveset(sceltaMossa, enemy);
-            Utilities.pausa(500);
+            if (playerBloccato) {
+                System.out.println("\nNon riesci muoverti...");
+            } else {
+                System.out.println("\nTurno del giocatore - scegli la tua mossa:");
+                player.stampaMoveset();
+                int sceltaMossa = sc.nextInt();
+                player.moveset(sceltaMossa, enemy);
+                Utilities.pausa(500);
+            }
 
             if (enemy.getHealth() <= 0) break;
 
             System.out.println("\nTurno Nemico:");
 
-            if (!player.bloccaTurnoNemico()) {
+            if (enemyBloccato) {
+                System.out.println("Il nemico non riesce a muoversi...");
+            }else{
                 int sceltaBot = enemy.mossaCPU();
                 enemy.moveset(sceltaBot, player);
+                Utilities.pausa(500);
             }
 
             player.aggiornaCooldown();

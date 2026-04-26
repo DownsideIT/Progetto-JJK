@@ -10,8 +10,6 @@ public class HealthChanges {
 
     protected int cooldownMossa;
 
-    boolean awakening;
-
     public HealthChanges(double health){
         this.health = health;
         this.maxHealth = health;
@@ -25,11 +23,11 @@ public class HealthChanges {
     }
 
     public int getAwakenbar() {
-        return awakenBar;
+        return 0;
     }
 
     public int getDomainbar() {
-        return domainBar;
+        return 0;
     }
 
     public void cura(double valore){
@@ -67,10 +65,7 @@ public class HealthChanges {
     }
 
     public void stampaBarre() {
-        if (!awakening) {
-            System.out.println("Awakening: " + getAwakenbar() + "%");
-        } else {
-            System.out.println("Domain: " + getDomainbar() + "%");
-        }
+        System.out.println("Awaken: " + getAwakenbar() + "%");
+        System.out.println("Domain: " + getDomainbar() + "%");
     }
 }
