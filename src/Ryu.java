@@ -6,7 +6,6 @@ public class Ryu extends HealthChanges{
     int awakenState=0;
 
     protected int awakenbar=0;
-    protected int awakenbar2=0;
     protected int domainbar=0;
     protected int domainCounter=0;
     protected int overheat=0;
@@ -149,7 +148,7 @@ public class Ryu extends HealthChanges{
                     case 2:
                         System.out.println("\nDiamoci dentro");
                         Utilities.pausa(1500);
-                        target.faiDanno(800+(charge*100));
+                        target.faiDannoDiretto(800+(charge*100));
                         awakenState=2;
                         cura(300);
                         break;

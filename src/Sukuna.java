@@ -158,7 +158,7 @@ public class Sukuna extends HealthChanges {
                 case 3:
                     if(!usedFurnace) {
                         System.out.println("Open Furnace");
-                        target.faiDanno(600);
+                        target.faiDannoDiretto(600);
                         if (domainCounter == 0) {
                             domainbar+=70;
                         }

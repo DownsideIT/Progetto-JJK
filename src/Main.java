@@ -16,11 +16,18 @@ public class Main {
         HealthChanges player = null;
         HealthChanges enemy = null;
 
+        System.out.println("\n\nMade by Tony because he had nothing to do\n\n");
+        Utilities.pausa(1500);
+
+        System.out.println("Jujutsu Kaisen PvP game\n\n");
+        Utilities.pausa(1000);
+
         System.out.println("Scegli il personaggio:");
         System.out.println("1) Gojo");
         System.out.println("2) Sukuna");
         System.out.println("3) Megumi (WIP)");
-        System.out.println("4) Ryu (WIP) ");
+        System.out.println("4) Ryu");
+        System.out.println("5) Naoya");
 
         String sceltaPlayer = sc.next();
 
@@ -46,6 +53,11 @@ public class Main {
                     Utilities.pausa(200);
                     sceltaValida=true;
                     break;
+                case "5":
+                    player=new Naoya(2000);
+                    Utilities.pausa(200);
+                    sceltaValida=true;
+                    break;
                 default:
                     System.out.println("Personaggio non esistente");
                     sceltaPlayer = sc.next();
@@ -59,7 +71,8 @@ public class Main {
         System.out.println("2) Sukuna");
         System.out.println("3) Megumi");
         System.out.println("4) Ryu");
-        System.out.println("5) Dummy");
+        System.out.println("5) Naoya");
+        System.out.println("6) Dummy");
 
         String sceltaEnemy = sc.next();
 
@@ -86,6 +99,11 @@ public class Main {
                     Utilities.pausa(200);
                     break;
                 case "5":
+                    enemy=new Naoya(2000);
+                    Utilities.pausa(200);
+                    sceltaValida=true;
+                    break;
+                case "6":
                     enemy = new Dummy(10000);
                     sceltaValida = true;
                     Utilities.pausa(200);
@@ -132,13 +150,30 @@ public class Main {
             player.aggiornaCooldown();
             enemy.aggiornaCooldown();
 
-            System.out.println("\nVita Player: " + player.getHealth());
+            if(player.bleedTurns > 0){
+                System.out.println("\nStai sanguinando...");
+                Utilities.pausa(500);
+                player.faiDanno(player.bleedDamage);
+                player.bleedTurns--;
+            }else{
+                System.out.println("\n");
+            }
 
+            System.out.println("Vita Player: " + player.getHealth());
             player.stampaBarre();
 
             Utilities.pausa(1000);
 
-            System.out.println("\nVita Enemy: " + enemy.getHealth());
+            if(enemy.bleedTurns > 0){
+                System.out.println("\nStai sanguinando...");
+                Utilities.pausa(500);
+                enemy.faiDanno(enemy.bleedDamage);
+                enemy.bleedTurns--;
+            }else{
+                System.out.println("\n");
+            }
+
+            System.out.println("Vita Enemy: " + enemy.getHealth());
             Utilities.pausa(1000);
         }
 

@@ -10,13 +10,31 @@ public class HealthChanges {
 
     protected int cooldownMossa;
 
+    protected int bleedTurns = 0;
+
+    protected double bleedDamage = 0;
+
     public HealthChanges(double health){
         this.health = health;
         this.maxHealth = health;
     }
 
     public void faiDanno(double danno){
+
+        if(tryDodge()){
+            System.out.println("Schivato!");
+            return;
+        }
+
         health -= danno;
+        if(health < 0){
+            health = 0;
+        }
+    }
+
+    public void faiDannoDiretto(double danno){
+        health -= danno;
+
         if(health < 0){
             health = 0;
         }
@@ -50,6 +68,15 @@ public class HealthChanges {
         if (cooldownMossa>0) {
             cooldownMossa--;
         }
+    }
+
+    public void applicaBleeding(int turns, double damagePerTurn){
+        bleedTurns = turns;
+        bleedDamage = damagePerTurn;
+    }
+
+    public boolean tryDodge() {
+        return false;
     }
 
     public boolean bloccaTurnoNemico() {
