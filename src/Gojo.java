@@ -214,6 +214,31 @@ public class Gojo extends HealthChanges {
         }
     }
 
+    @Override
+    public void infoMosse(int sceltainfo){
+        System.out.println("Seleziona la mossa di cui sapere i dettagli:\n");
+        if(!awakening){
+            System.out.println("1) Lapse blue\n2) Reversal red\n3) Punch Combo\n4) Awakening: Six Eyes");
+        }else{
+            System.out.println("1) Max Lapse Blue\n2) Max Reversal Red\n3) Furious Beatdown\n4) Hollow Purple\n5) Domain Expansion: Unlimited Void");
+        }
+        if(!awakening) {
+            switch(sceltainfo){
+                case 1:
+                    System.out.println("Lapse blue: Danno 50, Awakening: +15\n");
+
+                case 2:
+                    System.out.println("Reversal red: Danno 150, Awakening: +10\n");
+
+                case 3:
+                    System.out.println("Punch combo: Danno 75, Awakening: +5\nBlack flash: Danno 300, Awakening: +30\n");
+
+                case 4:
+                    System.out.println("Six Eyes: Cura 500. \nRisveglia il tuo potenziale latente, ottenendo una versione potenziata delle mosse precedenti e l'accesso al Domain");
+            }
+        }
+    }
+
     public void unlimitedVoid(){
         if (unlimitedVoidStun>0) {
             unlimitedVoidStun -= 1;

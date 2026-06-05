@@ -85,6 +85,8 @@ public class HealthChanges {
 
     public void stampaMoveset(){}
 
+    public void infoMosse(int sceltainfo){}
+
     public void moveset(int scelta, HealthChanges target){}
 
     public int mossaCPU(){
