@@ -114,7 +114,7 @@ public class Gojo extends HealthChanges {
                 case 1:
                     System.out.println("Max Lapse Blue");
                     if(unlimitedVoidStun>0){
-                        target.faiDanno(150*1.5);
+                        target.faiDannoDiretto(150*1.5);
                     }else {
                         target.faiDanno(150);
                         domainbar+=40;
@@ -128,7 +128,7 @@ public class Gojo extends HealthChanges {
                 case 2:
                     System.out.println("Max Reversal Red");
                     if(unlimitedVoidStun>0){
-                        target.faiDanno(300*1.5);
+                        target.faiDannoDiretto(300*1.5);
                     }else {
                         target.faiDanno(300);
                         domainbar+=40;
@@ -145,7 +145,7 @@ public class Gojo extends HealthChanges {
                     if (blackflash == 3) {
                         System.out.println("Black Flash!");
                         if(unlimitedVoidStun>0){
-                            target.faiDanno(500*1.5);
+                            target.faiDannoDiretto(500*1.5);
                         }else {
                             target.faiDanno(500);
                             domainbar+=100;
@@ -153,7 +153,7 @@ public class Gojo extends HealthChanges {
                     } else {
                         System.out.println("Furious Beatdown");
                         if(unlimitedVoidStun>0){
-                            target.faiDanno(150*1.5);
+                            target.faiDannoDiretto(150*1.5);
                         }else {
                             target.faiDanno(150);
                             domainbar+=40;
@@ -168,7 +168,7 @@ public class Gojo extends HealthChanges {
                     if(usedBlue && usedRed){
                         System.out.println("\nHollow Purple");
                         if(unlimitedVoidStun>0){
-                            target.faiDanno(800*1.5);
+                            target.faiDannoDiretto(800*1.5);
                         }else {
                             target.faiDanno(800);
                             domainbar+=100;
@@ -216,25 +216,45 @@ public class Gojo extends HealthChanges {
 
     @Override
     public void infoMosse(int sceltainfo){
-        System.out.println("Seleziona la mossa di cui sapere i dettagli:\n");
-        if(!awakening){
-            System.out.println("1) Lapse blue\n2) Reversal red\n3) Punch Combo\n4) Awakening: Six Eyes");
-        }else{
-            System.out.println("1) Max Lapse Blue\n2) Max Reversal Red\n3) Furious Beatdown\n4) Hollow Purple\n5) Domain Expansion: Unlimited Void");
-        }
         if(!awakening) {
             switch(sceltainfo){
                 case 1:
-                    System.out.println("Lapse blue: Danno 50, Awakening: +15\n");
+                    System.out.println("Lapse blue\n\nDanno: 50 | Awakening: +15\n");
+                    break;
 
                 case 2:
-                    System.out.println("Reversal red: Danno 150, Awakening: +10\n");
+                    System.out.println("Reversal red\n\nDanno: 150 | Awakening: +10\n");
+                    break;
 
                 case 3:
-                    System.out.println("Punch combo: Danno 75, Awakening: +5\nBlack flash: Danno 300, Awakening: +30\n");
+                    System.out.println("Punch combo\n\nDanno: 75 | Awakening: +5\n\nBlack Flash\n\nDanno: 300 | Awakening: +30\n");
+                    break;
 
                 case 4:
-                    System.out.println("Six Eyes: Cura 500. \nRisveglia il tuo potenziale latente, ottenendo una versione potenziata delle mosse precedenti e l'accesso al Domain");
+                    System.out.println("Six Eyes\n\nCura: 500\n\nRisveglia il tuo potenziale latente, ottenendo una versione potenziata delle mosse precedenti e l'accesso al Domain\n\nCondizioni: Awaken bar al 100%\n");
+                    break;
+            }
+        }else{
+            switch (sceltainfo){
+                case 1:
+                    System.out.println("Max Lapse Blue\n\nDanno: 150 | Domain: +40\nSe usata nel domain: Danno: 225\n");
+                    break;
+
+                case 2:
+                    System.out.println("Max Reversal Red\n\nDanno: 300 | Domain: +40\nSe usata nel domain: Danno: 450\n");
+                    break;
+
+                case 3:
+                    System.out.println("Furious Beatdown\n\nDanno: 150 | Domain: +40\nSe usata nel domain: Danno: 225\n\nBlack Flash\n\nDanno: 500 | Domain: +100\nSe usata nel domain: Danno: 750\n");
+                    break;
+
+                case 4:
+                    System.out.println("Hollow Purple\n\nDanno: 800 | Domain: +100\nSe usata nel domain: Danno: 1200\nCondizioni: aver usato Max Red e Max Blue in qualsiasi ordine\n");
+                    break;
+
+                case 5:
+                    System.out.println("5) Domain Expansion: Unlimited Void\n\nEspandi il tuo dominio se sul campo non è già presente un dominio attivo, per 3 turni, l'avversario è impossibilitato a muoversi\nCondizioni: Domain bar al 100%\n");
+                    break;
             }
         }
     }

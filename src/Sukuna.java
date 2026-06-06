@@ -215,9 +215,54 @@ public class Sukuna extends HealthChanges {
     @Override
     public void stampaMoveset(){
         if(!awakening) {
-            System.out.println("1) Dismantle\n2) Cleave\n3) Cursed Combo\n4) King of Curses");
+            System.out.println("1) Dismantle\n2) Cleave\n3) Cursed Combo\n4) Awakening: King of Curses");
         }else{
             System.out.println("1) Cleave Rush\n2) Heian Combination\n3) Open Furnace\n4) World Cutting Slash\n5) Domain Expansion: Malevolent Shrine");
+        }
+    }
+
+    @Override
+    public void infoMosse(int sceltainfo) {
+        if (!awakening) {
+            switch (sceltainfo) {
+                case 1:
+                    System.out.println("Dismantle\n\nDanno: 100 | Awakening: +15\n");
+                    break;
+
+                case 2:
+                    System.out.println("Cleave\n\nDanno: 125 | Awakening: +10\n");
+                    break;
+
+                case 3:
+                    System.out.println("Cursed Combo\n\nDanno: 50 | Awakening: +5\n\nBlack Flash\n\nDanno: 200 | Awakening: +35\n");
+                    break;
+
+                case 4:
+                    System.out.println("King of Curses\n\nCura: 500\n\nTorna alla tua forma originale dell'era Heian, ottenendo una versione potenziata delle mosse precedenti e l'accesso al Domain\n\nCondizioni: Awaken bar al 100%\n");
+                    break;
+            }
+        } else {
+            switch (sceltainfo) {
+                case 1:
+                    System.out.println("Cleave Rush\n\nDanno: 200 | Domain: +40\n");
+                    break;
+
+                case 2:
+                    System.out.println("Heian Combination\n\nDanno: 125 | Domain: +40\n\nBlack Flash\n\nDanno: 400 | Domain +100\n");
+                    break;
+
+                case 3:
+                    System.out.println("Open Furnace\n\nDanno: 600 | Domain: +70\n\nInschivabile\n\nCondizioni: Può essere usata solo una volta per match\n");
+                    break;
+
+                case 4:
+                    System.out.println("World Cutting Slash\n\nDanno: 850 | Domain: +100\nCondizioni: Necessita tutti e 3 i chant prima di poter essere utilizzato, resetta i chant dopo l'uso\n");
+                    break;
+
+                case 5:
+                    System.out.println("5) Domain Expansion: Malevolent Shrine\n\nEspandi il tuo dominio se sul campo non è già presente un dominio attivo, per 3 turni, l'avversario prende danno aggiuntivo ad ogni turno\nCondizioni: Domain bar al 100%\n");
+                    break;
+            }
         }
     }
 
@@ -236,7 +281,7 @@ public class Sukuna extends HealthChanges {
             System.out.println("\nMalevolent Shrine squarcia lo spazio");
             Utilities.pausa(1000);
             for(int i=0;i<10;i++){
-                target.faiDanno(17.5);
+                target.faiDannoDiretto(17.5);
             }
             domainCounter--;
         }

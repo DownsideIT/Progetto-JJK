@@ -192,7 +192,62 @@ public class Ryu extends HealthChanges{
         }else if(awakenState==1){
             System.out.println("1) Charge\n2) True cannon");
         }else if(awakenState==2){
-            System.out.println("1) All-out beat down\n2) Satisfaction at last \n3) Furious exchange");
+            System.out.println("1) All-out Beatdown\n2) Satisfaction at last \n3) Furious exchange");
+        }
+    }
+
+    @Override
+    public void infoMosse(int sceltainfo) {
+        if (awakenState==0) {
+            switch (sceltainfo) {
+                case 1:
+                    System.out.println("Granite blast\n\nDanno: 100 | Awakening: +15 | Surriscaldamento: +20\n\nCondizioni: Surriscaldamento sotto il 100\n");
+                    break;
+
+                case 2:
+                    System.out.println("Sudden exchange\n\nDanno: 75 | Awakening: +15\n");
+                    break;
+
+                case 3:
+                    System.out.println("Granite barrage\n\nDanno: 250 | Awakening: +30 | Surriscaldamento: +50\n\nCondizioni: Surriscaldamento sotto il 100\n");
+                    break;
+
+                case 4:
+                    System.out.println("Circling blast\n\nDanno: 125 | Awakening: +10 | Surriscaldamento: +25\n\nCondizioni: Surriscaldamento sotto il 100\n");
+                    break;
+
+                case 5:
+                    System.out.println("Re-style\n\nEffetto: Spendi il turno per resettare la barra del surriscaldamento a 0, indipendentemente dal valore del surriscaldamento\n");
+                    break;
+
+                case 6:
+                    System.out.println("Awakening: Every Last Drop\n\nCura: 500\n\nEntra in uno stato di carica di un colpo che utilizza fino all'ultima goccia della tua energia malefica\n\nCondizioni: Awaken bar al 100%\n");
+                    break;
+            }
+        } else if (awakenState==1){
+            switch (sceltainfo) {
+                case 1:
+                    System.out.println("Charge\n\nCariche: +1\n\nEffetto: Aumenta di 100 il danno di True Cannon per carica, arriva ad un massimo di 5 cariche\n");
+                    break;
+
+                case 2:
+                    System.out.println("True Cannon\n\nDanno: Da 800 a 1300 | Cura: 300\n\nInschivabile\n\nRilascia il tuo colpo più potente, utilizzando tutta la tua energia malefica.\nDopo l'utilizzo, passi automaticamente ad uno stato di combattimento corpo a corpo\n");
+                    break;
+            }
+        }else if(awakenState==2){
+            switch (sceltainfo){
+                case 1:
+                    System.out.println("All-out Beatdown\n\nDanno: 350 | Contraccolpo: 125\n");
+                    break;
+
+                case 2:
+                    System.out.println("Satisfaction at last\n\nDanno: 250 | Contraccolpo: 100\n");
+                    break;
+
+                case 3:
+                    System.out.println("Furious exchange\n\nDanno: 200 | Contraccolpo: 75\n");
+                    break;
+            }
         }
     }
 

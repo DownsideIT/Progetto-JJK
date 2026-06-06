@@ -11,6 +11,10 @@ public class Main {
 
         int turno=0;
 
+        Random random=new Random();
+
+        int musiceasteregg=0;
+
         boolean sceltaValida = false;
 
         HealthChanges player = null;
@@ -114,6 +118,16 @@ public class Main {
             }
         }
 
+        if(player instanceof Ryu || enemy instanceof Ryu){
+            musiceasteregg=random.nextInt(10)+1;
+            if(musiceasteregg==8){
+                Utilities.stopMusic();
+                Utilities.playMusicLoop("src/audio/jane.wav");
+                System.out.println("Ryu sembra molto più gasato del solito...");
+                Utilities.pausa(1000);
+            }
+        }
+
         while(player.getHealth() > 0 && enemy.getHealth() > 0) {
 
             boolean domainAttivo = player.isDomainActive() || enemy.isDomainActive();
@@ -128,11 +142,31 @@ public class Main {
             if (playerBloccato) {
                 System.out.println("\nNon riesci muoverti...");
             } else {
-                System.out.println("\nTurno del giocatore - scegli la tua mossa:");
-                player.stampaMoveset();
-                int sceltaMossa = sc.nextInt();
-                player.moveset(sceltaMossa, enemy);
-                Utilities.pausa(500);
+                while(true){
+                    System.out.println("\nTurno del giocatore - scegli la tua mossa:");
+                    player.stampaMoveset();
+                    System.out.println("0) Info mosse");
+
+                    int sceltaMossa = sc.nextInt();
+
+                    if(sceltaMossa == 0){
+
+                        System.out.println("Quale mossa vuoi esaminare?");
+                        Utilities.pausa(500);
+
+                        int info = sc.nextInt();
+
+                        player.infoMosse(info);
+                        Utilities.pausa(500);
+
+                        continue;
+                    }
+
+                    player.moveset(sceltaMossa, enemy);
+                    Utilities.pausa(500);
+
+                    break;
+                }
             }
 
             if (enemy.getHealth() <= 0) break;
